@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+port=$(($RANDOM%63000+2001))
+hname=$(hostname)
+
+echo ""$hname"     "$port"" > "$HOME"/.cache/jupyterlab.info
+jupyter lab --no-browser --port=$port --ip='*'
+
