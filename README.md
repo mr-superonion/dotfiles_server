@@ -5,7 +5,7 @@ variables:
 ```shell
 export PATH="_CURRENT_DIR_/bin/":$PATH
 ```
-Then please read the scripts and make sure that they will not ruin break your
+Then please read the scripts and make sure that they will not ruin  your
 computer.
 
 ## Job submission
