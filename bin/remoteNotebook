@@ -10,23 +10,22 @@
 # [ "$chosen" != "" ] || exit
 # info=$(grep "$chosen" $homeSys/xshare/server.info)
 
-# user@server_name
+# user@server_name (e.g., mr-superonion@soupy_onion.com)
 s=
-# port name
+# port name (e.g, 9582)
 p=
 
-# Connect to remote Jupyter server
-# input is the $(which jupyter) on server
-# download the file
-port1="$p"
-client=$(ssh "$s" cat \$HOME/.cache/jupyterlab.info | awk '{print $1}')
-port3=$(ssh "$s" cat \$HOME/.cache/jupyterlab.info | awk '{print $2}')
-
-# kill existing connections
+# kill existing identical connections first
 pids=$(lsof -i :"$port1" | awk '/IPv4/ && /LISTEN/ {print $2}')
 if [ pids ]; then
     kill $pids
 fi
+
+# Connect to remote Jupyter server
+## Download the file file storing the port client name on remote server
+port1="$p"
+client=$(ssh "$s" cat \$HOME/.cache/jupyterlab.info | awk '{print $1}')
+port3=$(ssh "$s" cat \$HOME/.cache/jupyterlab.info | awk '{print $2}')
 
 cmd="ssh -f -N -L "$port1":"$client":$port3 $s"
 echo "$cmd"
@@ -35,4 +34,6 @@ url="http://localhost:$port1"
 echo "URL that will open in your browser:"
 echo "$url"
 
+# If you do not have firefox, just comment this out and open the url in your
+# browser
 firefox "$url"
