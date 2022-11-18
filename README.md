@@ -9,14 +9,14 @@ Then please read the scripts and make sure that they will not ruin  your
 computer.
 
 ## Job submission
-[This script](./bin/myqsub) submit job to the Slurm system
+[This script](./bin/xsub) submit job to the Slurm system
 
 ## Run jupyterlab on server and open from local browser
 [This script](./bin/qsubJupyter) run jupyterlab on server
 You can runs jupyterlab on computing nodes by running the following command on
 server:
 ```shell
-myqsub qsubJupyter
+xsub qsubJupyter
 ```
 If you insist to run jupyterlab on the login nodes (before that is killed by
 the system monitor on the server), you can run
