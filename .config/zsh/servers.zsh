@@ -1,0 +1,5 @@
+export vers_psc="xiangchl@vera.psc.edu"
+export gfarm_ipmu="xiangchong.li@157.82.237.172"
+export idark_ipmu="xiangchong.li@idark.ipmu.jp"
+export gw_ipmu="xiangchong.li@192.168.156.68"
+export bridges2_psc="xiangchl@br012.bridges2.psc.edu"
