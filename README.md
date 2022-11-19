@@ -1,4 +1,4 @@
-# USEFUL SCRIPTS ON SERVER
+# USEFUL Dotfiles
 
 ## Job submission
 [This script](./.xbin/xsub) submit job to the Slurm system
