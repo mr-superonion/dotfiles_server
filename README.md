@@ -35,4 +35,4 @@ pip3 install --user nodejs
 ```
 
 ## zsh dotfiles
-TBD
+The configuration files for zsh can be found [here](./.config/zsh).
