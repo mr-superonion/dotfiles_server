@@ -86,3 +86,14 @@ highlight SpellBad ctermfg=009 ctermbg=000 cterm=underline
 " Substitute " Replace all is aliased to S.
 nnoremap S :%s///g<Left><Left>
 vnoremap // "zy/\V<C-R>=escape(@z,'/\')<CR><CR>
+
+" vim-commentary
+function UnmapCommentary()
+  unmap gc
+  nunmap gcc
+endfunction
+autocmd VimEnter * call UnmapCommentary()
+xmap <leader>c  <Plug>Commentary
+omap <leader>c  <Plug>Commentary
+nmap <leader>cc <Plug>CommentaryLine
+
