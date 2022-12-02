@@ -9,6 +9,7 @@ alias qstat="squeue -o'%.7i %.9P %.8j %.8u %.2t %.10M %.6D %C'"
 alias vim='nvim'
 alias qcat='ls |grep xcError-|sort -rn|head -1| read fn;cat $fn| grep --color -iE "Error|line"'
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias qdel='scancel'
 
 ## autocomplete
 # matches case insensitive for lowercase
@@ -30,10 +31,10 @@ bindkey -M vicmd '?' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-forward
 
 # Beginning search with arrow keys
-bindkey "^[OA" up-line-or-beginning-search
-bindkey "^[OB" down-line-or-beginning-search
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
+bindkey "^[OA" up-line-or-search
+bindkey "^[OB" down-line-or-search
+bindkey -M vicmd "k" up-line-or-search
+bindkey -M vicmd "j" down-line-or-search
 bindkey "^?" backward-delete-char
 
 # Change cursor shape for different vi modes.
