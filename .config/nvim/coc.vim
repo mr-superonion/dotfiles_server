@@ -1,3 +1,9 @@
+" List of extensions to install by default
+let g:coc_global_extensions = [
+      \ 'coc-clangd',
+      \ 'coc-pyright',
+      \ 'coc-git']
+
 " auto-edit plugins
 " Indent
 set tabstop=4
@@ -14,7 +20,7 @@ set updatetime=300
 set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-set signcolumn=number
+set signcolumn=yes
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
