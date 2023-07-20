@@ -1,7 +1,19 @@
-## .zshrc
+# .zshrc
 
-# the great intel fortran compiler
-#source /opt/intel/bin/ifortvars.sh intel64
+export LC_ALL=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Source global definitions
+if [ -f /etc/zshrc ]; then
+	. /etc/zshrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
 
 # source the configuation files
 typeset -U config_files
@@ -12,3 +24,19 @@ do
   source $file
 done
 unset config_files
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/global/homes/x/xiangchl/ana/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/global/homes/x/xiangchl/ana/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/global/homes/x/xiangchl/ana/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/global/homes/x/xiangchl/ana/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+
