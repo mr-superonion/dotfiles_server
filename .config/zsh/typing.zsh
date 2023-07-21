@@ -4,12 +4,18 @@
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+
 alias qstatxc="squeue -o'%.7i %.9P %.8j %.8u %.2t %.10M %.6D %C'| grep $USER"
 alias qstat="squeue -o'%.7i %.9P %.8j %.8u %.2t %.10M %.6D %C'"
 alias vim='nvim'
-alias qcat='ls |grep xcError-|sort -rn|head -1| read fn;cat $fn| grep --color -iE "Error|line"'
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias qdel='scancel'
+
 
 ## autocomplete
 # matches case insensitive for lowercase
