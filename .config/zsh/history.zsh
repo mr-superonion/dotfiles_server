@@ -1,6 +1,6 @@
 HISTFILE=~/.zsh_history
-HISTSIZE=3000
-SAVEHIST=3000
+HISTSIZE=5000
+SAVEHIST=5000
 
 setopt HIST_VERIFY
 setopt SHARE_HISTORY    # share history between sessions ???

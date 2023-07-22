@@ -7,7 +7,7 @@
 
 alias l='ls -CF'
 alias la='ls -A'
-alias ll='ls -alF'
+alias ll='ls -lF'
 alias ls='ls --color=auto'
 
 alias qstatxc="squeue -o'%.7i %.9P %.8j %.8u %.2t %.10M %.6D %C'| grep $USER"
@@ -15,7 +15,6 @@ alias qstat="squeue -o'%.7i %.9P %.8j %.8u %.2t %.10M %.6D %C'"
 alias vim='nvim'
 alias config='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias qdel='scancel'
-
 
 ## autocomplete
 # matches case insensitive for lowercase
