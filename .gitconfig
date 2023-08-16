@@ -3,6 +3,9 @@
 name = Xiangchong Li
 email = mr.superonion@hotmail.com
 
+[credential]
+	helper = store
+
 [core]
     editor = nvim
     pager = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified):'
