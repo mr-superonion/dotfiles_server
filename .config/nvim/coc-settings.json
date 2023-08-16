@@ -3,13 +3,14 @@
     "coc.preferences.formatOnSaveFiletypes": ["cpp", "vim"],
     "semanticTokens.enable": true,
   "  suggest.autoTrigger": "none",
-
     "python.analysis.useLibraryCodeForTypes": false,
     "diagnostic.level": "information",
+
     "diagnostic.showUnused": true,
     "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
     "python.analysis.useLibraryCodeForTypes": false,
     "pyright.inlayHints.variableTypes": false,
-    "pyright.inlayHints.functionReturnTypes": false,
+    "pyright.inlayHints.functionReturnTypes": false
 }
 // "python.linting.flake8Enabled": true,

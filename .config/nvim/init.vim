@@ -33,6 +33,7 @@ set nobackup
 autocmd BufWritePre * %s/\s\+$//e
 " Remember info about open buffers on close -------------- "
 set viminfo^=%
+set wrap
 
 runtime ./maps.vim
 runtime ./tele.vim

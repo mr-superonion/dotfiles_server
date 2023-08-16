@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+function print_help() {
+    echo "Usage: $0 [NODES] [TASKS_PER_NODE] [COMMAND]"
+    echo ""
+    echo "Submit a job to a PBS or Slurm queue."
+    echo ""
+    echo "Positional arguments:"
+    echo "  NODES            Number of nodes required"
+    echo "  TASKS_PER_NODE   Number of tasks (or cores) per node"
+    echo "  COMMAND          The command to run"
+    echo ""
+    echo "Optional arguments:"
+    echo "  -h, --help       Show this help message and exit"
+}
+
+# Check if user requested help
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    print_help
+    exit 0
+fi
+
+# Ensure user has provided necessary arguments
+if [[ $# -lt 3 ]]; then
+    echo "Error: Insufficient arguments provided."
+    echo ""
+    print_help
+    exit 1
+fi
+
+NODES=$1
+TASKS_PER_NODE=$2
+COMMAND="${@:3}"  # Takes all arguments starting from the third
+
+datetime="`date +%d%H%M%S`"
+JobName="xsub-"$datetime
+
+# Detect the job scheduler being used
+if which qsub &> /dev/null; then
+    scheduler="pbs"
+elif which sbatch &> /dev/null; then
+    scheduler="slurm"
+else
+    echo "Neither PBS/Torque nor Slurm detected!"
+    exit 1
+fi
+
+if [[ $scheduler == "slurm" ]]; then
+    foo="#!/usr/bin/env bash
+#SBATCH --nodes=$NODES
+#SBATCH --ntasks-per-node=$TASKS_PER_NODE
+#SBATCH --time=48:00:00
+#SBATCH --job-name=$JobName
+#SBATCH --output=xsub-out-$datetime
+#SBATCH --error=xsub-err-$datetime
+#SBATCH --mem=80G
+$(export)
+$(export -f)
+cd $PWD
+$COMMAND
+"
+    cd $PWD && echo "${foo@E}" | sbatch
+elif [[ $scheduler == "pbs" ]]; then
+    foo="#!/usr/bin/env bash
+#PBS -l nodes=$NODES:ppn=$TASKS_PER_NODE
+#PBS -l walltime=48:00:00
+#PBS -N $JobName
+#PBS -o xsub-out-$datetime
+#PBS -e xsub-err-$datetime
+#PBS -l mem=80GB
+cd $PBS_O_WORKDIR
+$(export)
+$(export -f)
+$COMMAND
+"
+    cd $PWD && echo "${foo@E}" | qsub
+fi
