@@ -6,10 +6,12 @@ and copy / link the folders under [.config](.config) to your $HOME/.config/ dire
 to install the scripts. 
 
 ## Job submission
+
 Use [this script](./.local/xbin/xsub) to submit job to the PBS or Slurm system.
 The script determines the job submission system automatically.
 
-## Run jupyterlab on server and open from local browser
+## Running JupyterLab on a Server & Accessing from a Local Browser
+
 With [this script](./.local/xbin/run_jupyter), you can run JupyterLab on the server. 
 To start JupyterLab on computing nodes, use the following command on the server:
 ```shell
@@ -23,7 +25,7 @@ run_jupyter
 Once JupyterLab is running on the server, open a terminal on your local computer 
 and run [this script](./.local/xbin/remoteNotebook) to connect to the notebook.
 
-## vim dotfiles
+## Vim Configuration
 
 I use vim-plug to manage plugins.
 ```shell
@@ -39,7 +41,7 @@ pip3 install --user nodejs
 ```
 You can also install them using conda or mamba within your Python environment.
 
-## zsh dotfiles
+## Zsh Configuration
 The configuration files for zsh can be found [here](./.config/zsh).
 
-## tmux dotfiles
+## Tmux Configuration
