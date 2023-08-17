@@ -4,7 +4,7 @@
 [This script](./.local/xbin/xsub) submit job to the Slurm system
 
 ## Run jupyterlab on server and open from local browser
-[This script](./.local/xbin/qsubJupyter) run jupyterlab on server
+[This script](./.local/xbin/run_jupyter) run jupyterlab on server
 You can runs jupyterlab on computing nodes by running the following command on
 server:
 ```shell
