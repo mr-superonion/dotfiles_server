@@ -6,8 +6,8 @@ function print_help() {
     echo "Submit a job to a PBS or Slurm queue."
     echo ""
     echo "Positional arguments:"
-    echo "  NODES            Number of nodes required"
-    echo "  TASKS_PER_NODE   Number of tasks (or cores) per node"
+    echo "  NODES            Number of nodes required (default: 1)"
+    echo "  TASKS_PER_NODE   Number of tasks (or cores) per node (default: 6)"
     echo "  COMMAND          The command to run"
     echo ""
     echo "Optional arguments:"
@@ -20,16 +20,9 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then
     exit 0
 fi
 
-# Ensure user has provided necessary arguments
-if [[ $# -lt 3 ]]; then
-    echo "Error: Insufficient arguments provided."
-    echo ""
-    print_help
-    exit 1
-fi
-
-NODES=$1
-TASKS_PER_NODE=$2
+# Set default values
+NODES=${1:-1}
+TASKS_PER_NODE=${2:-6}
 COMMAND="${@:3}"  # Takes all arguments starting from the third
 
 datetime="`date +%d%H%M%S`"
