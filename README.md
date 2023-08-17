@@ -2,7 +2,7 @@
 
 You can add the [.local/xbin](.local/xbin) directory to your $PATH [environment 
 variable](https://wiki.archlinux.org/title/environment_variables) 
-and put the files under [.config](.config) to your $HOME directory to install the scripts. 
+and put the folder [.config](.config) to your $HOME directory to install the scripts. 
 
 ## Job submission
 Use [this script](./.local/xbin/xsub) to submit job to the PBS or Slurm system.
