@@ -1,5 +1,8 @@
 # USEFUL Dotfiles
 
+You can add the [.local/xbin](.local/xbin) directory to your $PATH and put the files 
+under [.config](.config) to your $HOME directory to install the scripts. 
+
 ## Job submission
 Use [this script](./.local/xbin/xsub) to submit job to the PBS or Slurm system.
 The script determines the job submission system automatically.
