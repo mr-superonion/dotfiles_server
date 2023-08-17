@@ -1,22 +1,22 @@
 # USEFUL Dotfiles
 
 ## Job submission
-[This script](./.local/xbin/xsub) submit job to the Slurm system
+Use [this script](./.local/xbin/xsub) to submit job to the PBS or Slurm system.
+The script determines the job submission system automatically.
 
 ## Run jupyterlab on server and open from local browser
-[This script](./.local/xbin/run_jupyter) run jupyterlab on server
-You can runs jupyterlab on computing nodes by running the following command on
-server:
+With [this script](./.local/xbin/run_jupyter), you can run JupyterLab on the server. 
+To start JupyterLab on computing nodes, use the following command on the server:
 ```shell
-xsub qsubJupyter
+xsub run_jupyter
 ```
-If you prefer (not recommended) to run jupyterlab on the login nodes, you can
-run
+If you'd prefer to run JupyterLab on the login nodes (which isn't recommended), 
+simply use:
 ```shell
-qsubJupyter
+run_jupyter
 ```
-Then open a terminal in your local computer and run [this
-script](./.local/xbin/remoteNotebook) to connect to the notebook.
+Once JupyterLab is running on the server, open a terminal on your local computer 
+and run [this script](./.local/xbin/remoteNotebook) to connect to the notebook.
 
 ## vim dotfiles
 
@@ -25,14 +25,16 @@ I use vim-plug to manage plugins.
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
-Please find the vim setup [here](./.config/nvim). Remember to install pynvim
-and nodejs (to support coc). Also, you can install them using conda/mamba in
-your python environment.
+Check out the complete Vim setup at [here](./.config/nvim). Also, ensure pynvim 
+and nodejs are installed for compatibility with coc.
 
 ```shell
 pip3 install --user pynvim
 pip3 install --user nodejs
 ```
+You can also install them using conda or mamba within your Python environment.
 
 ## zsh dotfiles
 The configuration files for zsh can be found [here](./.config/zsh).
+
+## tmux dotfiles
