@@ -1,10 +1,10 @@
 # USEFUL Dotfiles
 
 ## Job submission
-[This script](./.xbin/xsub) submit job to the Slurm system
+[This script](./.local/xbin/xsub) submit job to the Slurm system
 
 ## Run jupyterlab on server and open from local browser
-[This script](./.xbin/qsubJupyter) run jupyterlab on server
+[This script](./.local/xbin/qsubJupyter) run jupyterlab on server
 You can runs jupyterlab on computing nodes by running the following command on
 server:
 ```shell
@@ -16,7 +16,7 @@ run
 qsubJupyter
 ```
 Then open a terminal in your local computer and run [this
-script](./.xbin/remoteNotebook) to connect to the notebook.
+script](./.local/xbin/remoteNotebook) to connect to the notebook.
 
 ## vim dotfiles
 
