@@ -1,39 +1,51 @@
-#!/usr/bin/env zsh
-# choose the server to login
+#!/usr/bin/env bash
 
-# Initialization
-# ssh-agent
-[ "$(ssh-add -l 2>/dev/null)" ] || ssh-add ~/.ssh/id_rsa
+# Prompt the user for server details
+read -p "Enter server (user@server_name): " s
+read -p "Enter port (default is 9555): " p
 
-# Which server to choose
-# chosen=$(grep -v "#" $homeSys/xshare/server.info | awk '{print $1}'| dmenu -g 1 -i -p 'choose the ssh server' -l 20 -fn Arial)
-# [ "$chosen" != "" ] || exit
-# info=$(grep "$chosen" $homeSys/xshare/server.info)
-
-# user@server_name (e.g., mr-superonion@soupy_onion.com)
-s=
-# port name (e.g, 9582)
-p=
-
-# kill existing identical connections first
-pids=$(lsof -i :"$port1" | awk '/IPv4/ && /LISTEN/ {print $2}')
-if [ pids ]; then
-    kill $pids
+# Set default port if none is provided
+if [[ -z "$p" ]]; then
+    p="9555"
 fi
 
-# Connect to remote Jupyter server
-## Download the file file storing the port client name on remote server
-port1="$p"
-client=$(ssh "$s" cat \$HOME/.cache/jupyterlab.info | awk '{print $1}')
-port3=$(ssh "$s" cat \$HOME/.cache/jupyterlab.info | awk '{print $2}')
+# Validate server details
+if [[ -z "$s" ]]; then
+    echo "Please provide the server details."
+    exit 1
+fi
 
-cmd="ssh -f -N -L "$port1":"$client":$port3 $s"
+# Terminate existing identical connections
+pids=$(lsof -i :"$p" | awk '/IPv4/ && /LISTEN/ {print $2}')
+if [[ -n "$pids" ]]; then
+    kill $pids || {
+        echo "Failed to terminate existing connections on port $p."
+        exit 1
+    }
+fi
+
+# Fetch client and port information from the remote server
+read client port3 <<< $(ssh "$s" "awk '{print \$1, \$2}' \$HOME/.cache/jupyterlab.info")
+if [[ -z "$client" || -z "$port3" ]]; then
+    echo "Failed to retrieve client or port information from remote server."
+    exit 1
+fi
+
+# Establish an SSH tunnel
+cmd="ssh -f -N -L $p:$client:$port3 $s"
 echo "$cmd"
-eval "$cmd"
-url="http://localhost:$port1"
+eval "$cmd" || {
+    echo "Failed to establish an SSH tunnel."
+    exit 1
+}
+
+# Print and open the Jupyter URL
+url="http://localhost:$p"
 echo "URL that will open in your browser:"
 echo "$url"
 
-# If you do not have firefox, just comment this out and open the url in your
-# browser
-firefox "$url"
+# Launch in firefox (or replace with your browser of choice)
+firefox "$url" || {
+    echo "Failed to launch Firefox. Please open the URL manually."
+    exit 1
+}
