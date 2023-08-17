@@ -45,6 +45,22 @@ else
     exit 1
 fi
 
+function determine_queue() {
+    local nodes=$1
+    local procs=$2
+    if [[ $nodes -eq 1 ]]; then
+        if [[ $procs -eq 1 ]]; then
+            echo "tiny"
+        else
+            echo "mini"
+        fi
+    elif [[ $nodes -gt 1 && $nodes -lt 5 ]]; then
+        echo "small"
+    else
+        echo "large"
+    fi
+}
+
 if [[ $scheduler == "slurm" ]]; then
     foo="#!/usr/bin/env bash
 #SBATCH --nodes=$NODES
@@ -53,25 +69,29 @@ if [[ $scheduler == "slurm" ]]; then
 #SBATCH --job-name=$JobName
 #SBATCH --output=xsub-out-$datetime
 #SBATCH --error=xsub-err-$datetime
-#SBATCH --mem=80G
+
 $(export)
 $(export -f)
 cd $PWD
 $COMMAND
 "
-    cd $PWD && echo "${foo@E}" | sbatch
+    #SBATCH --mem=80G
+    cd $PWD && echo "$foo" | sbatch
 elif [[ $scheduler == "pbs" ]]; then
+QUEUE=$(determine_queue $NODES $TASKS_PER_NODE)
     foo="#!/usr/bin/env bash
 #PBS -l nodes=$NODES:ppn=$TASKS_PER_NODE
 #PBS -l walltime=48:00:00
 #PBS -N $JobName
 #PBS -o xsub-out-$datetime
 #PBS -e xsub-err-$datetime
-#PBS -l mem=80GB
-cd $PBS_O_WORKDIR
+#PBS -q $QUEUE
+
 $(export)
 $(export -f)
+cd $PWD
 $COMMAND
 "
-    cd $PWD && echo "${foo@E}" | qsub
+    #PBS -l mem=80GB
+    cd $PWD && echo "$foo" | qsub
 fi
