@@ -8,7 +8,6 @@ email = mr.superonion@hotmail.com
 
 [core]
     editor = nvim
-    pager = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified):'
 
 [color]
     pager = true
